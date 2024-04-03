@@ -1,0 +1,103 @@
+﻿<Page x:Class="DefaultWpfApp.View.Pages.EventsPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:DefaultWpfApp.View.Pages"
+      mc:Ignorable="d" 
+      Title="EventsPage">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="150" />
+            <RowDefinition Height="1*" />
+        </Grid.RowDefinitions>
+
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="140" />
+                <ColumnDefinition Width="1*" />
+            </Grid.ColumnDefinitions>
+            <Image Margin="10" Name="image">
+                
+            </Image>
+            <StackPanel Grid.Column="1" VerticalAlignment="Bottom">
+                <TextBlock FontSize="15" Name="RoleTb" Foreground="White" Height="40" Width="200"/>
+                <TextBlock FontSize="15" Name="NameTb" Foreground="White" Height="40" Width="200"/>
+                <TextBlock FontSize="13" Name="AmountEvent" Foreground="White" Height="40" Width="200"/>
+            </StackPanel>
+        </Grid>
+        
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="60" />
+                <RowDefinition Height="60" />
+                <RowDefinition Height="1*" />
+            </Grid.RowDefinitions>
+
+            <Button Name="AddEventBtn"
+                    Click="AddEventBtn_Click"
+        Content="Создать мероприятие"
+                    Width="150"
+                    Height="40"
+        HorizontalAlignment="Left"
+        VerticalAlignment="Center"
+        Margin="38 0 0 0"/>
+
+            <TextBlock Name="RatintTb"
+                       HorizontalAlignment="Right"
+                       Width="120"
+                       Height="20"
+                       Margin="0 2 30 0"
+                       Background="White"
+                       FontSize="15"/>
+
+            <Button Name="ProfilBtn"
+                    Click="ProfilBtn_Click"
+        Content="Профиль"
+                    Width="150"
+                    Height="40"
+                            Grid.Row="1"
+        HorizontalAlignment="Center"
+        VerticalAlignment="Center"/>
+
+            <ListBox Background="Transparent" BorderThickness="0" MouseDoubleClick="basketLb_MouseDoubleClick" Name="basketLb" Grid.Row="2" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Hidden" Padding="0" HorizontalAlignment="Center" Width="360" ItemsSource="{Binding events}">
+                <ListBox.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel Width="{Binding ElementName=basketLb, Path=ActualWidth}" />
+                    </ItemsPanelTemplate>
+                </ListBox.ItemsPanel>
+
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Border Padding="10" BorderBrush="Gray" BorderThickness="1" CornerRadius="10" Margin="5" Width="340" Background="#FF251E1E">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+
+                         
+                                <Image Source="{Binding Image}" Width="50" Height="50" Margin="0 0 10 0" Grid.Column="0"/>
+
+                           
+                                <StackPanel Grid.Column="1">
+                             
+                                    <TextBlock Foreground="White" Text="{Binding EventName}" FontWeight="Bold" FontSize="20" Margin="0 0 0 5"/>
+                                    <StackPanel Orientation="Horizontal" Margin="0 0 0 5">
+                                        <TextBlock Foreground="White" Text="Количество участников: " FontWeight="Medium"/>
+                                        <TextBlock Foreground="White" Text="{Binding MaxParticipants}" FontWeight="Medium"/>
+                                    </StackPanel>
+                                    <TextBlock Foreground="White" Text="{Binding GameTypes.TypeName}" FontWeight="Medium" Margin="0 0 0 5"/>
+                                    <TextBlock Foreground="White" Text="{Binding StartDate, StringFormat='dd.MM.yyyy'}" FontWeight="Medium" Margin="0 0 0 5"/>
+
+                                </StackPanel>
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+
+        </Grid>
+    </Grid>
+</Page>
